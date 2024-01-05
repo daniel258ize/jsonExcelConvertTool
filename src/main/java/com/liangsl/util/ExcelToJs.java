@@ -21,33 +21,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class ExcelToJs {
-
-    /*   public static void main(String[] args) {
-           List<JsonDetailedSplitDto> excelData = getExcelData("D:\\PCCW_WINNIE\\工作\\2023-12-21\\source\\excel\\2024-1-2file\\APP (st)_JW20231229 - ch.xlsx");
-           String json = excelListToJson(excelData);
-           String jsString = getJsString(json);
-           FileWriter fileWriter = null;
-           BufferedWriter bufferedWriter = null;
-           try {
-               fileWriter = new FileWriter("F:\\min_winnie\\source\\APP (st)_JW20231229 - ch.txt");
-               bufferedWriter = new BufferedWriter(fileWriter);
-               bufferedWriter.write(jsString);
-           } catch (IOException e) {
-               e.printStackTrace();
-           } finally {
-               try {
-                   if (bufferedWriter != null) {
-                       bufferedWriter.close();
-                   }
-                   if (fileWriter != null) {
-                       fileWriter.close();
-                   }
-               } catch (IOException ex) {
-                   ex.printStackTrace();
-               }
-           }
-       }
-   */
     public static void excute(String pathName, String fileName) {
         List<JsonDetailedSplitDto> excelData = getExcelData(pathName);
         String json = excelListToJson(excelData);

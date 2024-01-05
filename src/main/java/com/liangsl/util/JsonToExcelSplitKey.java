@@ -19,7 +19,7 @@ import java.util.Map;
 
 
 public class JsonToExcelSplitKey {
-    public void excute(String filePath, String fileName) {
+    public static void excute(String filePath, String fileName) {
         String json = readWithFileInputStream(filePath + fileName);
         JSONObject jsonObject = JSON.parseObject(json, Feature.OrderedField);
         List<SimpleMergeDto> data = new ArrayList<SimpleMergeDto>();

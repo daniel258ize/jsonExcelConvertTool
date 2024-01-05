@@ -23,7 +23,7 @@ import java.util.Stack;
  * If the key in the js file contains single quotes, it needs to be removed manually after executing the program
  */
 public class JsToExcelSplitKey {
-    public void excute(String filePath, String fileName) {
+    public static void excute(String filePath, String fileName) {
         String json = readWithFileInputStream(filePath + fileName);
         List<SimpleMergeDto> dataList = getData(json);
         System.out.println("Total count:" + dataList.size());
