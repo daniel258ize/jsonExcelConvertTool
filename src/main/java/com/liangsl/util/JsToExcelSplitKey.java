@@ -20,9 +20,15 @@ import java.util.Stack;
 
 /**
  * importance:
- * If the key in the js file contains single quotes, it needs to be removed manually after executing the program
+ * If the keys in the js file contain single quotes, you need to remove the single quotes manually before executing the program
+ * e.g.'er_name':'YOU_HAVA' -> er_name:'YOU_HAVA'
  */
 public class JsToExcelSplitKey {
+    /**
+     * @param filePath       js file path
+     * @param fileName       js file name
+     * @param outputFilePath The path to the generated excel
+     */
     public static void excute(String filePath, String fileName, String outputFilePath) {
         String json = readWithFileInputStream(filePath + fileName);
         List<SimpleMergeDto> dataList = getData(json);
@@ -45,9 +51,6 @@ public class JsToExcelSplitKey {
             if (i > 0) {
                 preC = json.charAt(i - 1);//当前字符的前一个字符
             }
-            if (json.charAt(i) == 'E' && json.charAt(i + 1) == '4') {
-                System.out.println("(E4...)");
-            }
 
             //处理注释行//
             if (!isVal && c == '/' && json.charAt(i + 1) == '/') {
@@ -58,7 +61,6 @@ public class JsToExcelSplitKey {
             if (psFlag) {
                 if (c == '\t') {
                     if (preC != ' ' && preC != '/' && preC != '\t') {
-                        System.out.print(preC);
                         psFlag = false;
                     }
                 }

@@ -16,6 +16,8 @@ public class JsonDetailedSplitDto {
     private String key5;
     @ExcelProperty("key6")
     private String key6;
+    @ExcelProperty("key7")
+    private String key7;
     @ExcelProperty("lookupKey")
     private String lookupKey;
     @ExcelProperty("value")
@@ -85,17 +87,11 @@ public class JsonDetailedSplitDto {
         this.value = value;
     }
 
-    @Override
-    public String toString() {
-        return "JsonDetailedSplitDto{" +
-                "key1='" + key1 + '\'' +
-                ", key2='" + key2 + '\'' +
-                ", key3='" + key3 + '\'' +
-                ", key4='" + key4 + '\'' +
-                ", key5='" + key5 + '\'' +
-                ", key6='" + key6 + '\'' +
-                ", lookupKey='" + lookupKey + '\'' +
-                ", value='" + value + '\'' +
-                '}';
+    public String getKey7() {
+        return key7;
+    }
+
+    public void setKey7(String key7) {
+        this.key7 = key7;
     }
 }

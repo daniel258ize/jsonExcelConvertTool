@@ -20,15 +20,18 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Objects;
 
+import static com.liangsl.constant.Constants.LOOPUP_COL_READ;
+import static com.liangsl.constant.Constants.VALUE_COL_READ;
+
 public class ExcelToJs {
-    public static void excute(String pathName, String fileName) {
-        List<JsonDetailedSplitDto> excelData = getExcelData(pathName);
+    public static void excute(String filePath, String fileName, String outputFilePath) {
+        List<JsonDetailedSplitDto> excelData = getExcelData(filePath + fileName);
         String json = excelListToJson(excelData);
         String jsString = getJsString(json);
         FileWriter fileWriter = null;
         BufferedWriter bufferedWriter = null;
         try {
-            fileWriter = new FileWriter(fileName);
+            fileWriter = new FileWriter(outputFilePath + fileName.replace(".", "_") + System.currentTimeMillis() + ".js");
             bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(jsString);
         } catch (IOException e) {
@@ -61,14 +64,8 @@ public class ExcelToJs {
                 row = sheet.getRow(i);
                 if (row != null) {
                     JsonDetailedSplitDto jsonDetailedSplitDto = new JsonDetailedSplitDto();
-                    /*jsonDetailedSplitDto.setKey1(row.getCell(0).getStringCellValue());
-                    jsonDetailedSplitDto.setKey2(row.getCell(1).getStringCellValue());
-                    jsonDetailedSplitDto.setKey3(row.getCell(2).getStringCellValue());
-                    jsonDetailedSplitDto.setKey4(row.getCell(3).getStringCellValue());
-                    jsonDetailedSplitDto.setKey5(row.getCell(4).getStringCellValue());
-                    jsonDetailedSplitDto.setKey6(row.getCell(5).getStringCellValue());*/
-                    jsonDetailedSplitDto.setLookupKey(row.getCell(0).getStringCellValue());
-                    jsonDetailedSplitDto.setValue(row.getCell(1).getStringCellValue());
+                    jsonDetailedSplitDto.setLookupKey(row.getCell(LOOPUP_COL_READ).getStringCellValue());
+                    jsonDetailedSplitDto.setValue(row.getCell(VALUE_COL_READ).getStringCellValue());
                     jsonDetailedSplitDtos.add(jsonDetailedSplitDto);
                 }
             }

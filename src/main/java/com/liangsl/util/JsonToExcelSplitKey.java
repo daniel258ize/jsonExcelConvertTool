@@ -17,8 +17,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 public class JsonToExcelSplitKey {
+    /**
+     *
+     * @param filePath json file path
+     * @param fileName json file name
+     * @param outputFilePath The path to the generated excel
+     */
     public static void excute(String filePath, String fileName, String outputFilePath) {
         String json = readWithFileInputStream(filePath + fileName);
         JSONObject jsonObject = JSON.parseObject(json, Feature.OrderedField);

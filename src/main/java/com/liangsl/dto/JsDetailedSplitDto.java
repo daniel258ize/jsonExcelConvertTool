@@ -16,6 +16,8 @@ public class JsDetailedSplitDto {
     private String key5;
     @ExcelProperty("key6")
     private String key6;
+    @ExcelProperty("key7")
+    private String key7;
     @ExcelProperty("lookupKey")
     private String lookupKey;
     @ExcelProperty("value")
@@ -83,5 +85,13 @@ public class JsDetailedSplitDto {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public String getKey7() {
+        return key7;
+    }
+
+    public void setKey7(String key7) {
+        this.key7 = key7;
     }
 }

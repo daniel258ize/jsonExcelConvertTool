@@ -5,14 +5,7 @@ import com.liangsl.util.ExcelToJson;
 import com.liangsl.util.JsToExcelSplitKey;
 import com.liangsl.util.JsonToExcelSplitKey;
 
-/**
- * @ClassName test
- * @Description TODO
- * @Author LSL
- * @Date 2023/12/23 23:28
- * @Version 1.0
- * @Email lsl.yx@foxmail.com
- **/
+
 public class GenerateFileMaster {
     public static void main(String[] args) {
         /*
@@ -30,50 +23,57 @@ public class GenerateFileMaster {
         String fileName13 = "zh-HK.json";
         JsonToExcelSplitKey.excute(filePath11, fileName13, outputFilePath11);
 
-        /*
-         * Snippets: Convert i18n js to excel
+
+        /* Snippets: Convert i18n js to excel
+         *
+         * importance:
+         * If the keys in the js file contain single quotes, you need to remove the single quotes manually before executing the program
+         * e.g.'er_name':'YOU_HAVA' -> er_name:'YOU_HAVA'
          */
+
         String filePath21 = "D:\\PCCW_WINNIE\\工作\\2023-12-21\\source\\update\\";
         String outputFilePath21 = "D:\\PCCW_WINNIE\\工作\\2023-12-21\\source\\update\\";
 
         String fileName21 = "en.js.txt";
-        JsToExcelSplitKey.excute(filePath21,fileName21,outputFilePath21);
+        JsToExcelSplitKey.excute(filePath21, fileName21, outputFilePath21);
 
         String fileName22 = "zh_cn.js.txt";
-        JsToExcelSplitKey.excute(filePath21,fileName22,outputFilePath21);
+        JsToExcelSplitKey.excute(filePath21, fileName22, outputFilePath21);
 
         String fileName23 = "zh_hk.js.txt";
-        JsToExcelSplitKey.excute(filePath21,fileName23,outputFilePath21);
+        JsToExcelSplitKey.excute(filePath21, fileName23, outputFilePath21);
 
         /*
-         * Snippets: Convert excel to i18n json
+         *Snippets: Convert excel to i18n json
          */
-        String pathName31 = "C:\\Users\\XCL00321\\Downloads\\file_conversion_tool\\src\\main\\resources\\ori\\WEB (st)_JW20231228 cn.xlsx";
-        String fileName31 = "C:\\Users\\XCL00321\\Downloads\\file_conversion_tool\\src\\main\\resources\\target\\zh-cn_converted.json";
-        ExcelToJson.excute(pathName31,fileName31);
+        String filePath31 = "C:\\Users\\XCL00321\\Downloads\\file_conversion_tool v1.1\\src\\main\\resources\\ori\\ksk i18n 08012024\\self\\";
+        String outputFilePath31 = "C:\\Users\\XCL00321\\Downloads\\file_conversion_tool v1.1\\src\\main\\resources\\ori\\ksk i18n 08012024\\self\\";
 
-        String pathName32 = "C:\\Users\\XCL00321\\Downloads\\file_conversion_tool\\src\\main\\resources\\ori\\WEB (st)_JW20231228 en.xlsx";
-        String fileName32 = "C:\\Users\\XCL00321\\Downloads\\file_conversion_tool\\src\\main\\resources\\target\\en-us_converted.json";
-        ExcelToJson.excute(pathName32,fileName32);
+        String fileName31 = "WEB (st)_JW20231228  - cn.xlsx";
+        ExcelToJson.excute(filePath31, fileName31, outputFilePath31);
 
-        String pathName33 = "C:\\Users\\XCL00321\\Downloads\\file_conversion_tool\\src\\main\\resources\\ori\\WEB (st)_JW20231228 hk.xlsx";
-        String fileName33 = "C:\\Users\\XCL00321\\Downloads\\file_conversion_tool\\src\\main\\resources\\target\\zh-hk_converted.json";
-        ExcelToJson.excute(pathName33,fileName33);
+        String fileName32 = "WEB (st)_JW20231228  - en.xlsx";
+        ExcelToJson.excute(filePath31, fileName32, outputFilePath31);
+
+        String fileName33 = "WEB (st)_JW20231228  - hk.xlsx";
+        ExcelToJson.excute(filePath31, fileName33, outputFilePath31);
 
 
         /*
-         * Snippets: Convert excel to i18n js
+         *Snippets:Convert excel to i18n js
          */
-        String pathName41 = "D:\\PCCW_WINNIE\\工作\\2023-12-21\\source\\excel\\2024-1-2file\\APP (st)_JW20231229 - en.xlsx";
-        String fileName41 = "D:\\PCCW_WINNIE\\工作\\2023-12-21\\source\\excel\\2024-1-2file\\APP (st)_JW20231229 - en.js";
-        ExcelToJs.excute(pathName41,fileName41);
+        String filePath41 = "C:\\Users\\XCL00321\\Downloads\\file_conversion_tool v1.1\\src\\main\\resources\\ori\\ksk i18n 08012024\\self\\";
+        String outputFilePath41 = "C:\\Users\\XCL00321\\Downloads\\file_conversion_tool v1.1\\src\\main\\resources\\ori\\ksk i18n 08012024\\self\\";
 
-        String pathName42 = "D:\\PCCW_WINNIE\\工作\\2023-12-21\\source\\excel\\2024-1-2file\\APP (st)_JW20231229 - hk.xlsx";
-        String fileName42 = "D:\\PCCW_WINNIE\\工作\\2023-12-21\\source\\excel\\2024-1-2file\\APP (st)_JW20231229 - hk.js";
-        ExcelToJs.excute(pathName42,fileName42);
+        String fileName41 = "en-us_json1704700901968.xlsx";
+        ExcelToJs.excute(filePath41, fileName41, outputFilePath41);
 
-        String pathName43 = "D:\\PCCW_WINNIE\\工作\\2023-12-21\\source\\excel\\2024-1-2file\\APP (st)_JW20231229 - cn.xlsx";
-        String fileName43 = "D:\\PCCW_WINNIE\\工作\\2023-12-21\\source\\excel\\2024-1-2file\\APP (st)_JW20231229 - cn.js";
-        ExcelToJs.excute(pathName43,fileName43);
+        String fileName42 = "cn-us_json1704700901968.xlsx";
+        ExcelToJs.excute(filePath41, fileName42, outputFilePath41);
+
+        String fileName43 = "hk-us_json1704700901968.xlsx";
+        ExcelToJs.excute(filePath41, fileName43, outputFilePath41);
+
+
     }
 }

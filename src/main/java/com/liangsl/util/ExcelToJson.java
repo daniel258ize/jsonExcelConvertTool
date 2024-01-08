@@ -19,13 +19,13 @@ import static com.liangsl.constant.Constants.LOOPUP_COL_READ;
 import static com.liangsl.constant.Constants.VALUE_COL_READ;
 
 public class ExcelToJson {
-    public static void excute(String pathName, String fileName) {
-        List<JsonDetailedSplitDto> excelData = getExcelData(pathName);
+    public static void excute(String filePath, String fileName, String outputFilePath) {
+        List<JsonDetailedSplitDto> excelData = getExcelData(filePath + fileName);
         String json = excelListToJson(excelData);
         FileWriter fileWriter = null;
         BufferedWriter bufferedWriter = null;
         try {
-            fileWriter = new FileWriter(fileName);
+            fileWriter = new FileWriter(outputFilePath + fileName.replace(".", "_") + System.currentTimeMillis() + ".json");
             bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(json);
         } catch (IOException e) {
@@ -51,7 +51,7 @@ public class ExcelToJson {
         XSSFRow row;
         List<JsonDetailedSplitDto> jsonDetailedSplitDtos = new ArrayList<>();
         try {
-            InputStream is = new FileInputStream(new File(pathName));
+            InputStream is = new FileInputStream(pathName);
             book = new XSSFWorkbook(is);
             sheet = book.getSheetAt(0);
             for (int i = 1; i <= sheet.getLastRowNum(); i++) {
@@ -83,7 +83,7 @@ public class ExcelToJson {
             // a.f:22
             LinkedHashMap<String, Object> tmpNode = map;
             boolean hasFollowingDot = org.apache.commons.lang3.StringUtils.endsWith(lookupKey, ".");
-            if(hasFollowingDot) org.apache.commons.lang3.StringUtils.removeEnd(lookupKey, ".");
+            if (hasFollowingDot) org.apache.commons.lang3.StringUtils.removeEnd(lookupKey, ".");
             String[] keyList = org.apache.commons.lang3.StringUtils.split(lookupKey, '.');
             for (int j = 0; j < keyList.length - 1; j++) {
                 String key = keyList[j];
@@ -99,7 +99,7 @@ public class ExcelToJson {
                 }
             }
             String lastKey = keyList[keyList.length - 1];
-            if(hasFollowingDot) lastKey += ".";
+            if (hasFollowingDot) lastKey += ".";
             tmpNode.put(lastKey, dto.getValue());
         }
 //        System.out.println(map);
