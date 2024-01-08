@@ -19,14 +19,14 @@ import java.util.Map;
 
 
 public class JsonToExcelSplitKey {
-    public static void excute(String filePath, String fileName, String targetFilePath) {
+    public static void excute(String filePath, String fileName, String outputFilePath) {
         String json = readWithFileInputStream(filePath + fileName);
         JSONObject jsonObject = JSON.parseObject(json, Feature.OrderedField);
         List<SimpleMergeDto> data = new ArrayList<>();
         getData(data, new StringBuilder(), jsonObject);
         System.out.println("Total count:" + data.size());
 
-        String exportFileName = targetFilePath + fileName.replace(".", "_") + System.currentTimeMillis() + ".xlsx";
+        String exportFileName = outputFilePath + fileName.replace(".", "_") + System.currentTimeMillis() + ".xlsx";
         writeExcel(data, exportFileName);
     }
 
