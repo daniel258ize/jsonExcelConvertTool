@@ -19,18 +19,18 @@ import java.util.Map;
 
 
 public class JsonToExcelSplitKey {
-    public static void excute(String filePath, String fileName) {
+    public static void excute(String filePath, String fileName, String targetFilePath) {
         String json = readWithFileInputStream(filePath + fileName);
         JSONObject jsonObject = JSON.parseObject(json, Feature.OrderedField);
-        List<SimpleMergeDto> data = new ArrayList<SimpleMergeDto>();
-        StringBuilder sb = new StringBuilder("");
-        getData(data, sb, jsonObject);
+        List<SimpleMergeDto> data = new ArrayList<>();
+        getData(data, new StringBuilder(), jsonObject);
         System.out.println("Total count:" + data.size());
-        String exportFileName = filePath + fileName.replace(".", "_") + System.currentTimeMillis() + ".xlsx";
+
+        String exportFileName = targetFilePath + fileName.replace(".", "_") + System.currentTimeMillis() + ".xlsx";
         writeExcel(data, exportFileName);
     }
 
-    public static void getData(List<SimpleMergeDto> list, StringBuilder key, JSONObject jsonObj) {
+    private static void getData(List<SimpleMergeDto> list, StringBuilder key, JSONObject jsonObj) {
         StringBuilder k = new StringBuilder();
         for (Map.Entry<String, Object> entry : jsonObj.entrySet()) {
             String fullKey = entry.getKey();
@@ -54,11 +54,10 @@ public class JsonToExcelSplitKey {
         }
     }
 
-    public static void writeExcel(List<SimpleMergeDto> list, String fileName) {
+    private static void writeExcel(List<SimpleMergeDto> list, String fileName) {
         List<JsonDetailedSplitDto> jsonDetailedSplitDtos = new ArrayList<>();
         int max = 0;
         for (SimpleMergeDto simpleMergeDto : list) {
-            JsonDetailedSplitDto jsonDetailedSplitDto = new JsonDetailedSplitDto();
             if (StringUtils.isNotBlank(simpleMergeDto.getKey())) {
                 List<String> keyList = Arrays.asList(simpleMergeDto.getKey().split("\\."));
                 if (max < keyList.size()) {
@@ -70,19 +69,19 @@ public class JsonToExcelSplitKey {
                     if(fullKey.contains("||")) fullKey = fullKey.replace("||", ".");
                     keyMap.put("key" + (i + 1), fullKey);
                 }
-                jsonDetailedSplitDto = JSON.parseObject(JSON.toJSONString(keyMap), JsonDetailedSplitDto.class);
+                JsonDetailedSplitDto jsonDetailedSplitDto = JSON.parseObject(JSON.toJSONString(keyMap), JsonDetailedSplitDto.class);
                 jsonDetailedSplitDto.setLookupKey(simpleMergeDto.getKey().replace("||", "."));
                 jsonDetailedSplitDto.setValue(simpleMergeDto.getValue());
                 jsonDetailedSplitDtos.add(jsonDetailedSplitDto);
             }
         }
-        System.out.println("Maximum key level：" + max);
+        System.out.println("Maximum key level: " + max);
         EasyExcel.write(fileName, JsonDetailedSplitDto.class)
                 .sheet("data")
                 .doWrite(jsonDetailedSplitDtos);
     }
 
-    public static String readWithFileInputStream(String fileName) {
+    private static String readWithFileInputStream(String fileName) {
         String jsonString;
         StringBuilder sb = new StringBuilder();
         try {

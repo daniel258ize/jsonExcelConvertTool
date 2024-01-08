@@ -15,32 +15,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Objects;
 
-public class ExcelToJson {
-    /*public static void main(String[] args) {
-        List<JsonDetailedSplitDto> excelData = getExcelData(pa);
-        String json = excelListToJson(excelData);
-        FileWriter fileWriter = null;
-        BufferedWriter bufferedWriter = null;
-        try {
-            fileWriter = new FileWriter("F:\\min_winnie\\source\\en-US_json1703915448443.json");
-            bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(json);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (bufferedWriter != null) {
-                    bufferedWriter.close();
-                }
-                if (fileWriter != null) {
-                    fileWriter.close();
-                }
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }*/
+import static com.liangsl.constant.Constants.LOOPUP_COL_READ;
+import static com.liangsl.constant.Constants.VALUE_COL_READ;
 
+public class ExcelToJson {
     public static void excute(String pathName, String fileName) {
         List<JsonDetailedSplitDto> excelData = getExcelData(pathName);
         String json = excelListToJson(excelData);
@@ -80,14 +58,8 @@ public class ExcelToJson {
                 row = sheet.getRow(i);
                 if (row != null) {
                     JsonDetailedSplitDto jsonDetailedSplitDto = new JsonDetailedSplitDto();
-                   /* jsonDetailedSplitDto.setKey1(row.getCell(0).getStringCellValue());
-                    jsonDetailedSplitDto.setKey2(row.getCell(1).getStringCellValue());
-                    jsonDetailedSplitDto.setKey3(row.getCell(2).getStringCellValue());
-                    jsonDetailedSplitDto.setKey4(row.getCell(3).getStringCellValue());
-                    jsonDetailedSplitDto.setKey5(row.getCell(4).getStringCellValue());
-                    jsonDetailedSplitDto.setKey6(row.getCell(5).getStringCellValue());*/
-                    jsonDetailedSplitDto.setLookupKey(row.getCell(5).getStringCellValue());
-                    jsonDetailedSplitDto.setValue(row.getCell(3).getStringCellValue());
+                    jsonDetailedSplitDto.setLookupKey(row.getCell(LOOPUP_COL_READ).getStringCellValue());
+                    jsonDetailedSplitDto.setValue(row.getCell(VALUE_COL_READ).getStringCellValue());
                     jsonDetailedSplitDtos.add(jsonDetailedSplitDto);
                 }
             }
