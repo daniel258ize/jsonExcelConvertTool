@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Stack;
 
 /**
+ * Convert i18n js to excel
  * importance:
  * If the keys in the js file contain single quotes, you need to remove the single quotes manually before executing the program
  * e.g.'er_name':'YOU_HAVA' -> er_name:'YOU_HAVA'

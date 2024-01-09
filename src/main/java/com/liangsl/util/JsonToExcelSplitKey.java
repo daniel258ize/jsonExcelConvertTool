@@ -17,6 +17,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Convert i18n json to excel
+ */
 public class JsonToExcelSplitKey {
     /**
      *

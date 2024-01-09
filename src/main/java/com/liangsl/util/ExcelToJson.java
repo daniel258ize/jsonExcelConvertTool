@@ -18,7 +18,16 @@ import java.util.Objects;
 import static com.liangsl.constant.Constants.LOOPUP_COL_READ;
 import static com.liangsl.constant.Constants.VALUE_COL_READ;
 
+/**
+ * Convert excel to i18n json
+ */
 public class ExcelToJson {
+    /**
+     *
+     * @param filePath json file path
+     * @param fileName json file name
+     * @param outputFilePath The path to the generated excel
+     */
     public static void excute(String filePath, String fileName, String outputFilePath) {
         List<JsonDetailedSplitDto> excelData = getExcelData(filePath + fileName);
         String json = excelListToJson(excelData);
