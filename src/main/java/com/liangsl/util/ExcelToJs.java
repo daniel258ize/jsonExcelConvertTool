@@ -20,7 +20,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Objects;
 
-import static com.liangsl.constant.Constants.LOOPUP_COL_READ;
+import static com.liangsl.constant.Constants.LOOKUP_COL_READ;
 import static com.liangsl.constant.Constants.VALUE_COL_READ;
 
 /**
@@ -72,7 +72,7 @@ public class ExcelToJs {
                 row = sheet.getRow(i);
                 if (row != null) {
                     JsonDetailedSplitDto jsonDetailedSplitDto = new JsonDetailedSplitDto();
-                    jsonDetailedSplitDto.setLookupKey(row.getCell(LOOPUP_COL_READ).getStringCellValue());
+                    jsonDetailedSplitDto.setLookupKey(row.getCell(LOOKUP_COL_READ).getStringCellValue());
                     jsonDetailedSplitDto.setValue(row.getCell(VALUE_COL_READ).getStringCellValue());
                     jsonDetailedSplitDtos.add(jsonDetailedSplitDto);
                 }

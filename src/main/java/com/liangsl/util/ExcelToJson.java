@@ -7,7 +7,6 @@ import com.liangsl.dto.JsonDetailedSplitDto;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.commons.lang3.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Objects;
 
-import static com.liangsl.constant.Constants.LOOPUP_COL_READ;
+import static com.liangsl.constant.Constants.LOOKUP_COL_READ;
 import static com.liangsl.constant.Constants.VALUE_COL_READ;
 
 /**
@@ -67,7 +66,7 @@ public class ExcelToJson {
                 row = sheet.getRow(i);
                 if (row != null) {
                     JsonDetailedSplitDto jsonDetailedSplitDto = new JsonDetailedSplitDto();
-                    jsonDetailedSplitDto.setLookupKey(row.getCell(LOOPUP_COL_READ).getStringCellValue());
+                    jsonDetailedSplitDto.setLookupKey(row.getCell(LOOKUP_COL_READ).getStringCellValue());
                     jsonDetailedSplitDto.setValue(row.getCell(VALUE_COL_READ).getStringCellValue());
                     jsonDetailedSplitDtos.add(jsonDetailedSplitDto);
                 }
