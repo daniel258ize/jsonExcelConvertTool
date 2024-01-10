@@ -3787,12 +3787,8 @@
 		"SUBMIT":"Submit",
 		"TERMS_AND_CONDITIONS":"Terms and Conditions",
 		"TERMINATION_REQUEST_SUBMITTED":"Employees' Cessation of Employment Reported ",
-		"\"REFERENCE_NO":{
-			"\"":"Reference No.:"
-		},
-		"\"YOUR_REQUEST_IS_RECEIVED_WE_WILL_PROCESS_AND_NOTIFY_RESULT_SOON":{
-			"\"":"Your have reported employees' cessation of employment. You may check the status in the \"My Record\" page. You may also update or cancel the reimbursement/payment arrangement anytime before your reporting has been processed."
-		},
+		"REFERENCE_NO.":"Reference No.:",
+		"YOUR_REQUEST_IS_RECEIVED_WE_WILL_PROCESS_AND_NOTIFY_RESULT_SOON.":"Your have reported employees' cessation of employment. You may check the status in the \"My Record\" page. You may also update or cancel the reimbursement/payment arrangement anytime before your reporting has been processed.",
 		"BACK_TO_HOME":"Back to Home",
 		"SEE_TRANSACTION_RECORD":"Go to My Record",
 		"CONFIRMATION_PAGE":"Confirmation",
@@ -3818,17 +3814,13 @@
 		"BANK_ACCOUNT_NUMBER":"Bank Account No.",
 		"BENEFICIARY_BANK_NAME":"Beneficiary Bank Name",
 		"BENEFICIARY_BANK_ACCOUNT_HOLDER_NAME":"Beneficiary Bank Account Holder Name",
-		"\"BENEFICIARY_BANK_ACCOUNT_NO":{
-			"\"":"Beneficiary Bank Account No."
-		},
+		"BENEFICIARY_BANK_ACCOUNT_NO.":"Beneficiary Bank Account No.",
 		"BENEFICIARY_BANK_ADDRESS":"Beneficiary Bank Address",
 		"ADDRESS":"Address",
 		"BANK_DETAILS":"Bank Details",
 		"BENEFICIARY_BANK_SWIFT_CODE":"Beneficiary Bank SWIFT Code",
 		"BANK_CODE":"Bank Code",
-		"\"BENEFICIARY_BANK_IBAN_ABA_UID_NO":{
-			"\"":"Beneficiary Bank IBAN No. / ABA No. / UID No."
-		},
+		"BENEFICIARY_BANK_IBAN_ABA_UID_NO.":"Beneficiary Bank IBAN No. / ABA No. / UID No.",
 		"INTERMEDIARY_BANK_NAME":"Intermediary Bank Name",
 		"INTERMEDIARY_BANK_SWIFT_CODE":"Intermediary Bank SWIFT Code",
 		"BANK_BRANCH_CODE":"Bank Branch Code",
