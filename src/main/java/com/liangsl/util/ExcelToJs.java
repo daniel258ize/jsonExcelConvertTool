@@ -111,7 +111,7 @@ public class ExcelToJs {
             }
             tmpNode.put(keyList[keyList.length - 1], dto.getValue());
         }
-        System.out.println(JSON.toJSONString(map, true));
+        /*System.out.println(JSON.toJSONString(map, true));*/
         //将map中的数据拼接成js字符串
 
         return JSON.toJSONString(map, true);
@@ -266,6 +266,13 @@ public class ExcelToJs {
             }
         }
         return finalStr.toString();*/
+        //去掉第一个冒号
+        for (int i = 0; i < modifiedStr.length() - 1; i++) {
+            if (modifiedStr.charAt(i) == ':') {
+                modifiedStr.delete(i, i+1);
+                break;
+            }
+        }
         return modifiedStr.toString();
     }
 
