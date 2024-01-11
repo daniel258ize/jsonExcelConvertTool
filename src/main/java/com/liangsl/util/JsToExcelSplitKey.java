@@ -32,6 +32,7 @@ public class JsToExcelSplitKey {
      */
     public static void excute(String filePath, String fileName, String outputFilePath) {
         String json = readWithFileInputStream(filePath + fileName);
+        System.out.println(json);
         List<SimpleMergeDto> dataList = getData(json);
         System.out.println("Total count:" + dataList.size());
         String exportFileName = outputFilePath + fileName.replace(".", "_") + System.currentTimeMillis() + ".xlsx";
@@ -42,10 +43,22 @@ public class JsToExcelSplitKey {
         List<SimpleMergeDto> data = new ArrayList<>();
         Stack<String> keyStack = new Stack<>();
         StringBuilder word = new StringBuilder();
+
+        //给第一个{花括号前加上:冒号
+        for (int i = 0; i < json.length(); i++) {
+            if (json.charAt(i) == '{') {
+                StringBuilder sb = new StringBuilder(json);
+                sb.insert(i, ':');
+                json = sb.toString();
+                break;
+            }
+        }
+
         boolean isVal = false;
         boolean singleFlag = false;//value中单引号的标志
         boolean doubleFlag = false;//value中双引号的标志
         boolean psFlag = false;//注释行的标志
+        boolean colonFlag = false;//冒号的标志
         for (int i = 0; i < json.length(); i++) {
             char c = json.charAt(i);//当前字符
             char preC = '9';//当前字符的前一个字符
@@ -67,6 +80,10 @@ public class JsToExcelSplitKey {
                 }
                 continue;
             }
+            //没到冒号，不是值，遇到单引号(目的：处理key中包含单引号问题)
+            if (!colonFlag && !isVal && c == '\'') {
+                continue;
+            }
 
             // 非值且是 : ,证明是key结束，入栈，且重置单词
             if (!isVal && c == ':') {
@@ -79,10 +96,11 @@ public class JsToExcelSplitKey {
                 }
                 keyStack.push(wordStr);
                 word = new StringBuilder();
+                colonFlag = true;
                 continue;
             }
             // 非值且是单引号，则是值的开始，修改标识 ,如果是\`符号开始，新增标志
-            else if (!isVal && (c == '\'' || c == '`' || c == '"')) {
+            else if (colonFlag && !isVal && (c == '\'' || c == '`' || c == '"')) {
                 isVal = true;
                 word = new StringBuilder();
                 singleFlag = c == '`';
@@ -90,7 +108,7 @@ public class JsToExcelSplitKey {
                 continue;
             }
             // 是值且是分号，则是值的结束，
-            else if (isVal
+            else if (colonFlag && isVal
                     && ((!singleFlag && !doubleFlag && c == '\'' && preC != '\\')
                     || (singleFlag && c == '`')
                     || (doubleFlag && c == '"'))) {
@@ -103,6 +121,7 @@ public class JsToExcelSplitKey {
                 isVal = false;
                 singleFlag = false;
                 doubleFlag = false;
+                colonFlag = false;
                 word = new StringBuilder();
                 continue;
             }
@@ -117,6 +136,8 @@ public class JsToExcelSplitKey {
             }
             word.append(c);
         }
+
+
         return data;
     }
 
@@ -168,7 +189,7 @@ public class JsToExcelSplitKey {
             BufferedReader br = new BufferedReader(isr);
             String line;
             while ((line = br.readLine()) != null) {
-                sb.append(line);
+                sb.append(line + "\r\n");
             }
         } catch (Exception e) {
             e.printStackTrace();
