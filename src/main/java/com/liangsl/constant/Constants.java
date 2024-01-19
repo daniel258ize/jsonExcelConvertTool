@@ -13,4 +13,8 @@ public class Constants {
 
     //Read the row number of the value column of the excel
     public final static int VALUE_COL_READ = 8;
+
+    public final static int ENG_COL_READ = 8;
+    public final static int HK_COL_READ = 9;
+    public final static int CN_COL_READ = 10;
 }
