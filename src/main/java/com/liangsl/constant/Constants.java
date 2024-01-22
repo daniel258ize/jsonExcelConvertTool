@@ -15,6 +15,6 @@ public class Constants {
     public final static int VALUE_COL_READ = 8;
 
     public final static int ENG_COL_READ = 8;
-    public final static int HK_COL_READ = 9;
-    public final static int CN_COL_READ = 10;
+    public final static int CN_COL_READ = 9;
+    public final static int HK_COL_READ = 10;
 }

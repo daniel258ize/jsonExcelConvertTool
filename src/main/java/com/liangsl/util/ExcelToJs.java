@@ -35,6 +35,7 @@ public class ExcelToJs {
     public static void excute(String filePath, String fileName, String outputFilePath) {
         List<JsonDetailedSplitDto> excelData = getExcelData(filePath + fileName);
         String json = excelListToJson(excelData);
+        System.out.println(json);
         String jsString = getJsString(json);
         FileWriter fileWriter = null;
         BufferedWriter bufferedWriter = null;
@@ -162,35 +163,40 @@ public class ExcelToJs {
                         for (int k = 0; k < key.length(); k++) {
                             if (key.charAt(k) == '\t') {
                                 modifiedKey.append(key.charAt(k));
+                            } else if (key.charAt(k) == '\\' && key.charAt(k + 1) == '"') {
+                                //转义字符
+                                modifiedKey.append('"');
                             } else if (key.charAt(k) != '"' && key.charAt(k - 1) != '\t') {
                                 modifiedKey.append(key.charAt(k));
-                            } else if (key.charAt(k) == '"' && key.contains(" ")) {
-                                //如果key中有空格，需要用单引号包着key
-                                modifiedKey.append("'");
                             }
-                        }
-                        if (key.contains(" ")) {
-                            //如果key中有空格，需要用单引号包着key
-                            modifiedKey.append("'");
                         }
 
                         //value
+                        //if the value contains ' -> use "
+                        //if the value contains " -> use '
+                        //if the value contains both ' & " -> use `
+                        //defaults use '
+
                         if (keyValue.length > 1) {
                             String value = keyValue[1];
-                            if (StringUtils.isNotBlank(value) && value.contains("'")) {
-                                value = "`" + value;
+                            if (StringUtils.isNotBlank(value)) {
                                 value = value.substring(0, value.length() - 2);
-                                value = value + "`,";
-                            } else {
-                                value = "'" + value;
-                                value = value.substring(0, value.length() - 2);
-                                value = value + "',";
+                                if (value.contains("'") && value.contains("\"")) {
+                                    value = "`" + value;
+                                    value = value + "`,";
+                                } else if (value.contains("'")) {
+                                    value = "\"" + value;
+                                    value = value + "\",";
+                                } else {
+                                    value = "'" + value;
+                                    value = value + "',";
+                                }
+                                //替換被被转义的字符
+                                value = value.replace("\\\"", "\"");
+                                //替換被被转义的字符
+                                value = value.replace("\\\\n", "\\n");
+                                modifiedStr.append(modifiedKey).append(':').append(" ").append(value);
                             }
-                            //替換被被转义的字符
-                            value = value.replace("\\\"", "\"");
-                            //替換被被转义的字符
-                            value = value.replace("\\\\n", "\\n");
-                            modifiedStr.append(modifiedKey).append(':').append(" ").append(value);
                         }
                     }
                     //情况4：包含:
@@ -203,37 +209,34 @@ public class ExcelToJs {
                         for (int k = 0; k < key.length(); k++) {
                             if (key.charAt(k) == '\t') {
                                 modifiedKey.append(key.charAt(k));
+                            } else if (key.charAt(k) == '\\' && key.charAt(k + 1) == '"') {
+                                //转义字符
+                                modifiedKey.append('"');
                             } else if (key.charAt(k) != '"' && key.charAt(k - 1) != '\t') {
                                 modifiedKey.append(key.charAt(k));
-                            } else if (key.charAt(k) == '"' && key.contains(" ")) {
-                                //如果key中有空格，需要用单引号包着key
-                                modifiedKey.append("'");
                             }
-                        }
-                        if (key.contains(" ")) {
-                            //如果key中有空格，需要用单引号包着key
-                            modifiedKey.append("'");
                         }
 
                         //value
                         if (keyValue.length > 1) {
                             String value = keyValue[1];
-                            if (StringUtils.isNotBlank(value) && value.contains("'")) {
-                                value = "`" + value;
+                            if (StringUtils.isNotBlank(value)) {
                                 value = value.substring(0, value.length() - 1);
+                                if (value.contains("'") && value.contains("\"")) {
+                                    value = "`" + value;
+                                    value = value + "`,";
+                                } else if (value.contains("'")) {
+                                    value = "\"" + value;
+                                    value = value + "\",";
+                                } else {
+                                    value = "'" + value;
+                                    value = value + "',";
+                                }
                                 //替換被被转义的字符
                                 value = value.replace("\\\"", "\"");
                                 //替換被被转义的字符
                                 value = value.replace("\\\\n", "\\n");
-                                modifiedStr.append(modifiedKey).append(':').append(" ").append(value).append('`').append(',');
-                            } else {
-                                value = "'" + value;
-                                value = value.substring(0, value.length() - 1);
-                                //替換被被转义的字符
-                                value = value.replace("\\\"", "\"");
-                                //替換被被转义的字符
-                                value = value.replace("\\\\n", "\\n");
-                                modifiedStr.append(modifiedKey).append(':').append(" ").append(value).append('\'').append(',');
+                                modifiedStr.append(modifiedKey).append(':').append(" ").append(value);
                             }
                         }
                     }
@@ -269,7 +272,7 @@ public class ExcelToJs {
         //去掉第一个冒号
         for (int i = 0; i < modifiedStr.length() - 1; i++) {
             if (modifiedStr.charAt(i) == ':') {
-                modifiedStr.delete(i, i+1);
+                modifiedStr.delete(i, i + 1);
                 break;
             }
         }
