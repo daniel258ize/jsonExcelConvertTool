@@ -1,9 +1,6 @@
 package com.liangsl;
 
-import com.liangsl.util.ExcelToJs;
-import com.liangsl.util.ExcelToJson;
-import com.liangsl.util.JsToExcelSplitKey;
-import com.liangsl.util.JsonToExcelSplitKey;
+import com.liangsl.util.*;
 
 
 public class GenerateFileMaster {
@@ -74,6 +71,10 @@ public class GenerateFileMaster {
 //        String fileName43 = "hk-us_json1704700901968.xlsx";
 //        ExcelToJs.excute(filePath41, fileName43, outputFilePath41);
 
+        String filePath = "D:\\PCCW_WINNIE\\work\\2023-12-21(json-excel-tool)\\source\\v14\\";
+        String outputFilePath = "D:\\PCCW_WINNIE\\work\\2023-12-21(json-excel-tool)\\source\\v14\\";
 
+        String fileName = "api i18n 22012024.xlsx";
+        SplitMultilingualFiles.excute(filePath, fileName, outputFilePath);
     }
 }
